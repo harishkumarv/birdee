@@ -12,16 +12,11 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class NewClass extends cc.Component {
-    onKeyDown(e:cc.Event.EventCustom) {
-        if (e.keyCode == cc.KEY.space) {
-            // transition to scene two.
-            cc.director.loadScene("game")
-        }
-    }
-
+    @property(cc.Label)
+    label:cc.Label = null;
     start () {
-        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
-
+        var s = cc.sys.localStorage.getItem("score");
+        this.label.string = "Score: " + s;
+        var s = cc.sys.localStorage.setItem("score", 0);
     }
-
 }

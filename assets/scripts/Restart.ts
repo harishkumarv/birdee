@@ -12,6 +12,7 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class NewClass extends cc.Component {
+
     onKeyDown(e:cc.Event.EventCustom) {
         if (e.keyCode == cc.KEY.space) {
             // transition to scene two.
@@ -21,7 +22,8 @@ export default class NewClass extends cc.Component {
 
     start () {
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
-
     }
 
 }
+
+cc.director.loadScene("game")

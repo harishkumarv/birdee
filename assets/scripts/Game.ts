@@ -59,11 +59,15 @@ export default class NewClass extends cc.Component {
     start () {
         var self = this;
         this.node.on("SCORE", function() {
+
+            shouldCreatePipes = false;
             score++;
         });
 
         this.node.on("ON", function() {
+            console.log("ON Event");
             shouldCreatePipes = true;
+            score = 0;
             self.startGame();
         });
 
@@ -74,6 +78,9 @@ export default class NewClass extends cc.Component {
             pipes.forEach(function(e:cc.Node) {
                 e.dispatchEvent(new cc.Event.EventCustom("STOP", true));
             });
+            cc.director.loadScene("gameover");
+            cc.sys.localStorage.setItem("score", score);
+            score = 0;
         });
         
     }
@@ -85,6 +92,9 @@ export default class NewClass extends cc.Component {
     }
 
     onLoad() {
+        console.log("Load done");
+        lastPipe = null;
+        shouldCreatePipes = false;
         var manager = cc.director.getCollisionManager();
         manager.enabled = true;
         manager.enabledDebugDraw = true;

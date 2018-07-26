@@ -9,7 +9,4 @@ export default class NewClass extends cc.Component {
     onCollisionExit(other, self) {
         this.node.parent.dispatchEvent(new cc.Event.EventCustom("SCORE", true));
     }
-
-
-    // update (dt) {}
 }
